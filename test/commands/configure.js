@@ -21,7 +21,7 @@ describe('the configure module', () => {
   it('should add credentials when none are found', async () => {
     sinon.stub(inquirer, 'prompt').resolves({ key: 'one', secret: 'two' })
     await configure.consumer(testprog)
-    const [key, secret] = await creds.getKeyAndSecret()
+    const [key, secret] = await creds.getKeyAndSecret('apiKey')
     expect(key).to.equal('one')
     expect(secret).to.equal('two')
     expect(inquirer.prompt.calledOnce).to.be.true()
@@ -31,7 +31,7 @@ describe('the configure module', () => {
   it('should overwrite existing credentials', async () => {
     sinon.stub(inquirer, 'prompt').resolves({ key: 'three', secret: 'four' })
     await configure.consumer(testprog)
-    const [key, secret] = await creds.getKeyAndSecret()
+    const [key, secret] = await creds.getKeyAndSecret('apiKey')
     expect(key).to.equal('three')
     expect(secret).to.equal('four')
     expect(inquirer.prompt.calledOnce).to.be.true()
