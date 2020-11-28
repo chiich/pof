@@ -13,6 +13,13 @@ program
   })
 
 program
+  .command('account')
+  .description('Authorise access to app account')
+  .action(async () => {
+    await configure.account(pkg.name)
+  })
+
+program
   .parse(process.argv)
 
 if (!process.argv.slice(2).length) {

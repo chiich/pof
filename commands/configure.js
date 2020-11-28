@@ -1,6 +1,8 @@
 const inquirer = require('inquirer')
+const querystring = require('querystring')
 const util = require('../lib/util')
 const CredentialManager = require('../lib/credential-manager')
+const App = require('../lib/app')
 
 const configure = {
   async consumer (name) {
@@ -20,6 +22,40 @@ const configure = {
       }
     ])
     await creds.storeKeyAndSecret('apiKey', answers.key, answers.secret)
+  },
+
+  async account (name) {
+    const creds = new CredentialManager(name)
+    const [apiKey, apiSecret] = await creds.getKeyAndSecret('apiKey')
+    const app = new App(apiKey, apiSecret)
+    const response = querystring.parse(await app.post('oauth/request_token'))
+    app.setToken(response.oauth_token, response.oauth_token_secret)
+    await inquirer.prompt({
+      type: 'input',
+      message: 'Press Enter to open Twitter in your default browser to authorise access',
+      name: 'continue'
+    })
+
+    util.openBrowser(`${app.baseURL}oauth/authorize?oauth_token=${response.oauth_token}`)
+
+    const answers = inquirer.prompt({
+      type: 'input',
+      message: 'Enter the PIN provided by App',
+      name: 'pin',
+      validate: util.notEmpty
+    })
+
+    const tokenResponse = querystring.parse(
+      await app.post('oauth/access_token', `oauth_verifier=${answers.pin}`)
+    )
+
+    app.setToken(tokenResponse.oauth_token, tokenResponse.oauth_token_secret)
+
+    const verifyResponse = await app.get('1.1/account/verify_credentials.json')
+    await creds.storeKeyAndSecret('accountToken', tokenResponse.oauth_token, tokenResponse.oauth_token_secret
+    )
+
+    console.log(`Account "${verifyResponse.screen_name}" successfully added`)
   }
 }
 
