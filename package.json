@@ -14,7 +14,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "7.14.0"
+    "chai": "4.2.0",
+    "eslint": "7.14.0",
+    "mocha": "8.2.1",
+    "sinon": "9.2.1"
   },
   "dependencies": {
     "configstore": "5.0.1",
