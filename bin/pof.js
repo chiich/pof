@@ -1,12 +1,10 @@
 #!/usr/bin/env node
-const CredentialManager = require('../lib/credential-manager');
+const CredentialManager = require('../lib/credential-manager')
 
 async function main () {
-
-  const creds = new CredentialManager('pof');
-  let [key, secret] = await creds.getKeyAndSecret();
-  console.log(key, secret);
-  
+  const creds = new CredentialManager('pof')
+  const [key, secret] = await creds.getKeyAndSecret()
+  console.log(key, secret)
 }
 
-main().catch(console.error);
+main().catch(console.error)
