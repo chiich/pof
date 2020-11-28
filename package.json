@@ -28,9 +28,11 @@
     "sinon": "9.2.1"
   },
   "dependencies": {
+    "axios": "0.21.0",
     "commander": "6.2.0",
     "configstore": "5.0.1",
     "inquirer": "7.3.3",
-    "keytar": "7.2.0"
+    "keytar": "7.2.0",
+    "oauth-1.0a": "2.2.6"
   }
 }
