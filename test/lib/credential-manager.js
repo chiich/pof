@@ -9,7 +9,7 @@ const CredentialManager = require('../../lib/credential-manager')
 chai.use(chaiAsPromised)
 chai.use(dirtyChai)
 
-describe('a credential manager', () => {
+describe('the credential manager', () => {
   const testprog = 'pof-test'
   let creds
 
