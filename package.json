@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive",
+    "test": "nyc mocha --recursive",
     "lint:init": "eslint --init"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
     "mocha": "8.2.1",
+    "nyc": "15.1.0",
     "sinon": "9.2.1"
   },
   "dependencies": {
