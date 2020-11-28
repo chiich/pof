@@ -1,4 +1,6 @@
 const chai = require('chai')
+const path = require('path')
+const fs = require('fs')
 const chaiAsPromised = require('chai-as-promised')
 const dirtyChai = require('dirty-chai')
 const expect = chai.expect
@@ -8,10 +10,11 @@ chai.use(chaiAsPromised)
 chai.use(dirtyChai)
 
 describe('a credential manager', () => {
+  const testprog = 'pof-test'
   let creds
 
   before(() => {
-    creds = new CredentialManager('pof-test')
+    creds = new CredentialManager(testprog)
   })
 
   it('should return credentials when they are found', async () => {
@@ -26,7 +29,7 @@ describe('a credential manager', () => {
     expect(creds.getKeyAndSecret()).to.be.rejected()
   })
 
-  after(async () => {
-    await creds.clearKeyAndSecret()
+  after((done) => {
+    fs.unlink(path.join(process.env.HOME, '.config', 'configstore', `${testprog}.json`), done)
   })
 })
