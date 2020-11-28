@@ -33,8 +33,7 @@ describe('a credential manager', () => {
     })
   })
 
-  after(() => {
-    creds.conf.delete('apiKey')
-    creds.conf.delete('apiSecret')
+  after(async () => {
+    await creds.clearKeyAndSecret()
   })
 })
