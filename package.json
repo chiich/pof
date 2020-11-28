@@ -1,5 +1,5 @@
 {
-  "name": "pof-cli",
+  "name": "pof",
   "version": "1.0.0",
   "description": "",
   "bin": {
@@ -26,6 +26,7 @@
     "sinon": "9.2.1"
   },
   "dependencies": {
+    "commander": "6.2.0",
     "configstore": "5.0.1",
     "inquirer": "7.3.3",
     "keytar": "7.2.0"

@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-const CredentialManager = require('../lib/credential-manager')
 
-async function main () {
-  const creds = new CredentialManager('pof')
-  const [key, secret] = await creds.getKeyAndSecret()
-  console.log(key, secret)
-}
+const program = require('commander')
+const pkg = require('../package.json')
 
-main().catch(console.error)
+program
+  .version(pkg.version)
+  .command('configure', 'Configure app-related credentials')
+  .parse(process.argv)
