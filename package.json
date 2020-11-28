@@ -15,5 +15,9 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "7.14.0"
+  },
+  "dependencies": {
+    "configstore": "5.0.1",
+    "inquirer": "7.3.3"
   }
 }
