@@ -13,29 +13,36 @@ chai.use(dirtyChai)
 describe('the configure module', () => {
   const testprog = 'pof-test'
   let creds
+  let sandbox
 
   before(() => {
     creds = new CredentialManager(testprog)
   })
 
+  beforeEach(() => {
+    sandbox = sinon.sandbox.create()
+  })
+
   it('should add credentials when none are found', async () => {
-    sinon.stub(inquirer, 'prompt').resolves({ key: 'one', secret: 'two' })
+    sandbox.stub(inquirer, 'prompt').resolves({ key: 'one', secret: 'two' })
     await configure.consumer(testprog)
     const [key, secret] = await creds.getKeyAndSecret('apiKey')
     expect(key).to.equal('one')
     expect(secret).to.equal('two')
     expect(inquirer.prompt.calledOnce).to.be.true()
-    inquirer.prompt.restore()
   })
 
   it('should overwrite existing credentials', async () => {
-    sinon.stub(inquirer, 'prompt').resolves({ key: 'three', secret: 'four' })
+    sandbox.stub(inquirer, 'prompt').resolves({ key: 'three', secret: 'four' })
     await configure.consumer(testprog)
     const [key, secret] = await creds.getKeyAndSecret('apiKey')
     expect(key).to.equal('three')
     expect(secret).to.equal('four')
     expect(inquirer.prompt.calledOnce).to.be.true()
-    inquirer.prompt.restore()
+  })
+
+  afterEach(() => {
+    sandbox.restore()
   })
 
   after((done) => {
