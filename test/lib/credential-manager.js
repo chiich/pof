@@ -17,6 +17,27 @@ describe('the credential manager', () => {
     creds = new CredentialManager(testprog)
   })
 
+  it('should return credentials set in the environment', async () => {
+    process.env[`${testprog.toUpperCase()}_CONSUMER_KEY`] = 'one'
+    process.env[`${testprog.toUpperCase()}_CONSUMER_SECRET`] = 'two'
+    const [key, secret] = await creds.getKeyAndSecret('consumer')
+    expect(key).to.equal('one')
+    expect(secret).to.equal('two')
+    delete process.env[`${testprog.toUpperCase()}_CONSUMER_KEY`]
+    delete process.env[`${testprog.toUpperCase()}_CONSUMER_SECRET`]
+  })
+
+  it('should prefer credentials set in the environment', async () => {
+    process.env[`${testprog.toUpperCase()}_CONSUMER_KEY`] = 'one'
+    process.env[`${testprog.toUpperCase()}_CONSUMER_SECRET`] = 'two'
+    await creds.storeKeyAndSecret('consumer', 'three', 'four')
+    const [key, secret] = await creds.getKeyAndSecret('consumer')
+    expect(key).to.equal('one')
+    expect(secret).to.equal('two')
+    delete process.env[`${testprog.toUpperCase()}_CONSUMER_KEY`]
+    delete process.env[`${testprog.toUpperCase()}_CONSUMER_SECRET`]
+  })
+
   it('should return credentials when they are found', async () => {
     await creds.storeKeyAndSecret('consumer', 'foo', 'bar')
     const [key, secret] = await creds.getKeyAndSecret('consumer')
