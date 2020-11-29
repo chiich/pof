@@ -1,5 +1,5 @@
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const chai = require('chai')
 const expect = chai.expect
 const sinon = require('sinon')
@@ -54,7 +54,7 @@ describe('the configure module', () => {
       .onFirstCall().resolves({ continue: '' })
       .onSecondCall().resolves({ pin: '1234' })
     sandbox.stub(util, 'openBrowser').returns('')
-    sandbox.spy(console, 'log')
+    sandbox.stub(console, 'log')
     await configure.account(testprog)
     CredentialManager.prototype.getKeyAndSecret.restore()
 
@@ -68,7 +68,8 @@ describe('the configure module', () => {
     sandbox.restore()
   })
 
-  after((done) => {
-    fs.unlink(path.join(process.env.HOME, '.config', 'configstore', `${testprog}.json`), done)
+  after(async () => {
+    await creds.clearAll()
+    await fs.unlink(path.join(process.env.HOME, '.config', 'configstore', `${testprog}.json`))
   })
 })
