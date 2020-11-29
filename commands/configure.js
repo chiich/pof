@@ -43,9 +43,9 @@ const configure = {
 
       util.openBrowser(`${app.baseURL}oauth/authorize?oauth_token=${response.oauth_token}`)
 
-      const answers = inquirer.prompt({
+      const answers = await inquirer.prompt({
         type: 'input',
-        message: 'Enter the PIN provided by App',
+        message: 'Enter the PIN provided by App:',
         name: 'pin',
         validate: util.notEmpty
       })
