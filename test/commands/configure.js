@@ -28,7 +28,7 @@ describe('the configure module', () => {
   it('should add credentials when none are found', async () => {
     sandbox.stub(inquirer, 'prompt').resolves({ key: 'one', secret: 'two' })
     await configure.consumer(testprog)
-    const [key, secret] = await creds.getKeyAndSecret('apiKey')
+    const [key, secret] = await creds.getKeyAndSecret('consumer')
     expect(key).to.equal('one')
     expect(secret).to.equal('two')
     expect(inquirer.prompt.calledOnce).to.be.true()
@@ -37,7 +37,7 @@ describe('the configure module', () => {
   it('should overwrite existing credentials', async () => {
     sandbox.stub(inquirer, 'prompt').resolves({ key: 'three', secret: 'four' })
     await configure.consumer(testprog)
-    const [key, secret] = await creds.getKeyAndSecret('apiKey')
+    const [key, secret] = await creds.getKeyAndSecret('consumer')
     expect(key).to.equal('three')
     expect(secret).to.equal('four')
     expect(inquirer.prompt.calledOnce).to.be.true()
@@ -58,7 +58,7 @@ describe('the configure module', () => {
     await configure.account(testprog)
     CredentialManager.prototype.getKeyAndSecret.restore()
 
-    const [token, secret] = await creds.getKeyAndSecret('accountToken')
+    const [token, secret] = await creds.getKeyAndSecret('account')
     expect(token).to.equal('ghi')
     expect(secret).to.equal('jkl')
     expect(console.log.calledWith('Account "foo" successfully added')).to.be.true()
