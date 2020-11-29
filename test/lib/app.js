@@ -1,11 +1,13 @@
 const chai = require('chai')
 const expect = chai.expect
+const chaiAsPromised = require('chai-as-promised')
 const dirtyChai = require('dirty-chai')
 const sinon = require('sinon')
 const axios = require('axios')
 
 const App = require('../../lib/app')
 
+chai.use(chaiAsPromised)
 chai.use(dirtyChai)
 
 describe('the app module', () => {
@@ -31,5 +33,29 @@ describe('the app module', () => {
     const response = await app.post('/api', 'stuff')
     expect(response).to.equal('bar')
     axios.post.restore()
+  })
+  it('should reject on invalid credentials', async () => {
+    sinon.stub(axios, 'post').rejects(new Error('401'))
+    await expect(app.post('/api', 'stuff')).to.be.rejectedWith('Invalid API credentials')
+    axios.post.restore()
+    sinon.stub(axios, 'get').rejects(new Error('401'))
+    await expect(app.get('/api')).to.be.rejectedWith('Invalid API credentials')
+    axios.get.restore()
+  })
+  it('should reject on rate limit error', async () => {
+    sinon.stub(axios, 'post').rejects(new Error('429'))
+    await expect(app.post('/api', 'stuff')).to.be.rejectedWith('API rate limit reached')
+    axios.post.restore()
+    sinon.stub(axios, 'get').rejects(new Error('429'))
+    await expect(app.get('/api')).to.be.rejectedWith('API rate limit reached')
+    axios.get.restore()
+  })
+  it('should reject on other errors', async () => {
+    sinon.stub(axios, 'post').rejects(new Error('foo'))
+    await expect(app.post('/api', 'stuff')).to.be.rejectedWith('API:')
+    axios.post.restore()
+    sinon.stub(axios, 'get').rejects(new Error('foo'))
+    await expect(app.get('/api')).to.be.rejectedWith('API:')
+    axios.get.restore()
   })
 })
