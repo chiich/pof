@@ -1,0 +1,6 @@
+language: node_js
+node_js: lts/erbium
+addons:
+  apt:
+    packages:
+      - libsecret-1-0 
