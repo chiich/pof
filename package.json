@@ -1,17 +1,16 @@
 {
-  "name": "pof",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@chiich/pof",
+  "version": "1.0.1",
+  "description": "A Node CLI tool. Currently configured for use in accessing the Twitter v1.1 API",
   "bin": {
     "pof": "./bin/pof.js"
   },
-  "main": "index.js",
   "scripts": {
     "test": "nyc mocha --recursive",
     "lint:init": "eslint --init"
   },
   "keywords": [],
-  "author": "",
+  "author": "chiich",
   "license": "ISC",
   "devDependencies": {
     "chai": "4.2.0",
