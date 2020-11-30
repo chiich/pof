@@ -9,12 +9,16 @@ program
 program
   .command('consumer')
   .description('Add app API key and secret')
-  .action(() => configure.consumer(pkg.name).catch(util.handleError))
+  .action(() => configure
+    .consumer(util.extractName(pkg.name))
+    .catch(util.handleError))
 
 program
   .command('account')
   .description('Authorise access to app account')
-  .action(() => configure.account(pkg.name).catch(util.handleError))
+  .action(() => configure
+    .account(util.extractName(pkg.name))
+    .catch(util.handleError))
 
 program
   .parse(process.argv)
