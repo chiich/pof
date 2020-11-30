@@ -1,6 +1,9 @@
 const chai = require('chai')
 const path = require('path')
 const fs = require('fs-extra')
+const sinon = require('sinon')
+const keytar = require('keytar')
+const _ = require('lodash')
 const chaiAsPromised = require('chai-as-promised')
 const dirtyChai = require('dirty-chai')
 const expect = chai.expect
@@ -12,8 +15,21 @@ chai.use(dirtyChai)
 describe('the credential manager', () => {
   const testprog = 'pof-test'
   let creds
+  const secrets = {}
 
   before(() => {
+    sinon.stub(keytar, 'setPassword').callsFake((service, key, secret) => {
+      _.set(secrets, `${service}.${key}`, secret)
+      return Promise.resolve()
+    })
+    sinon.stub(keytar, 'getPassword').callsFake((service, key) => {
+      const value = _.set(secrets, `${service}.${key}`)
+      return value ? Promise.resolve(value) : Promise.reject(new Error('Missing consumer key'))
+    })
+    sinon.stub(keytar, 'deletePassword').callsFake((service, key) => {
+      _.unset(secrets, `${service}.${key}`)
+      return Promise.resolve()
+    })
     creds = new CredentialManager(testprog)
   })
 
@@ -68,6 +84,9 @@ describe('the credential manager', () => {
 
   after(async () => {
     await creds.clearAll()
+    keytar.getPassword.restore()
+    keytar.setPassword.restore()
+    keytar.deletePassword.restore()
     await fs.unlink(path.join(process.env.HOME, '.config', 'configstore', `${testprog}.json`))
   })
 })
