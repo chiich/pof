@@ -5,6 +5,9 @@
   "bin": {
     "pof": "./bin/pof.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "nyc mocha --recursive",
     "lint:init": "eslint --init"
