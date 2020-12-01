@@ -1,6 +1,6 @@
 {
   "name": "@chiich/pof",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node CLI tool. Currently configured for use in accessing the Twitter v1.1 API",
   "bin": {
     "pof": "./bin/pof.js"
