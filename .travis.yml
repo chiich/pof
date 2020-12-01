@@ -3,5 +3,15 @@ node_js: lts/erbium
 addons:
   apt:
     packages:
-      - libsecret-1-0
-       
+    - libsecret-1-0
+deploy:
+  provider: npm
+  api_key:
+    secure: u41UVRyOF0vCSNEQslnMCCiyDWOFUS5vmrI/nfB8f9fhE7BmtK1Qz7/7pq9R3ly5pF0Vs5GVCxNOG3tNRnaP9B+k9thupqcImZZdFxCVc6fIy0cGosCEH5BOzdNNw5DP3JSJZbx0YFzl6jIXq9CKtFqvnT2rIV7Cvs2rSPO9wCSYFk3kxVJM9Kxd9oZi/8hHg6nxZQiY9VnSOW42CH/rkAYul1zdgZxCZJmYn+KsuH7pQ99gvsGFvshYMhUmIu/UnTE2WJbbCKLIsYTN1cj5RASfosvmv//CQb4FMcmZZwQkJ1yQwz5LAsnUvs1oy2uQc2GVVsK76O8sCqE58uR9+HbK7tA9Z14mSEyNpeJrSAACY3dUIUZsxX/ZwG396m7Lt1wjrkWbnVWDzYkEQJnPnHRR8U27e/sxXItsrqLb8/uRICSLGaca/Bu3MphmFQcV1va0q4GcJfICklziVhrA4WJhzjRlfxrmGh23uQHIzYjQcnJRH0qeSaMrv10ZRm9QS5b/AwMhdPaxws9xHX8QnzPAqUlMffh5wLMrnF7KPrd4O8QY9dsfY93QwaCAjnK9U5hPHFXAAFccHXHge7CbywYYf+PbJLn4BsdHQO43gNh4h3qOLL7dCVXE5MVCDinOsJaLhDLImL+/dLVhTNVZtOAEEx9eFoHcn69zS8IXFr0=
+  on:
+    tags: true
+    repo: chiich/pof
+    branch: main
+  skip_cleanup: 'true'
+  email:
+    secure: ZhFBiqmpzaVOUe/dGQXnwXuITHKmR+Cn+7CRNak5XQVxUtm/EhOzls6BBz14M5V8aAd7piPLe2LZltD6H436ocouDT3FlGMJF8AD8kNiTWGjrl2nu+BVBCgavOW85kIfpC1BEuGcuZNZK3+RlKqeMbbYvWNfq+bfNLuTUoWgWqC+N9iTWZIe/q0oMiE4DIQ+ld6KUxY4VCBuIYKOJM89inK0TxIRahiFk1QtGd6x3F/fzLu4Elkp57BmmpFlbrk62tRZyh8G4AWJ7r0C3K0gHyqpfDgBP8jAM44PXGqouu95Y+U9xffrjaJee8xOW+dnpVpZ2kZWj8/STJUIpcIwAv5TiGcRiN65L5Fwp6AlqV7lIblqvMxN5BuvAU7p/94WdZMhpaewOq6ZLqD7mqAw1VFwZfisS3EgYciZ/a2bg2P0xwIDFiowDOlNBX8pHmSaoafICLk57eaPLSHbwesMQo3MySI5amzS/Df6dm3EbLPHk7gfNorXq2EG6iYl/aJ7LYunTcOtKIoD7486XEeC8AV3MNV3YeVetmEVEBHfGtsQizoRtBk3EGTBVXebRxt4xRKq+HVAdPlFwe5Tdzi4BOIi/+yNSKtWzfPuEROJrk3nzhRA9mphQ4T8lUCTK2nXhbqs4OaSktnU8/Acif1i8lPpCvHQz3xVBEM8/db33iI=
