@@ -7,6 +7,7 @@ Check out for more info on better TLS handling: https://developer.twitter.com/en
 ### Modules of Interest
 - [win-ca](https://github.com/ukoloff/win-ca)
 - [dotenv](https://github.com/motdotla/dotenv)
+- [travis-cli](https://github.com/travis-ci/travis.rb)
 
 ### Articles of Interest
 - [How to Resolve Certificate Errors in a Node.js App with SSL Calls](https://levelup.gitconnected.com/how-to-resolve-certificate-errors-in-nodejs-app-involving-ssl-calls-781ce48daded)
