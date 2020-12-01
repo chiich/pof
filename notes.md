@@ -16,3 +16,9 @@
 - `travis login --github-token <what-is-the-token>`
 - `travis setup npm`
 - `travis encrypt <email-address> --add deploy.email`
+- `travis encrypt DOCKER_USERNAME=${docker-username} --add env.global`
+- `travis encrypt DOCKER_PASSWORD=${docker-password} --add env.global`
+
+### Docker
+- `docker build --build-arg version=v${version-number} -t ${app-name-without-at-sign}:latest .`
+- `docker run --env-file env.list ${app-name-without-at-sign} lookup usrs ${user-name}`
