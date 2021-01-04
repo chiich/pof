@@ -38,7 +38,6 @@ describe('the lookup module', () => {
       lookup.users(testprog, null, { stdin, stdout })
 
       stdout.on('finish', () => {
-        // JSON.parse(JSON.stringify(stdout.data)) // <-- revisit to see if it helps with making test below pass
         expect(stdout.data)
           .to.deep.equal([{ screen_name: 'foo' }, { screen_name: 'bar' }])
         done()
