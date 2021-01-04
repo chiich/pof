@@ -16,3 +16,29 @@ Check out for more info on better TLS handling: https://developer.twitter.com/en
 - [3 Flavors: Promises, Observables, and Streams. Do You Know The Differences Between Them?](https://levelup.gitconnected.com/promise-vs-observable-vs-stream-165a310e886f)
 - [Basic test of JSONStream not working](https://stackoverflow.com/questions/19432968/basic-test-of-jsonstream-not-working)
 - [How to use stream.pipe](https://nodejs.org/en/knowledge/advanced/streams/how-to-use-stream-pipe/)
+
+
+### Refactor: candidates
+- Flattening array: hhttps://humanwhocodes.com/snippets/2019/02/flatten-array-javascript-generator/
+- Replacing 'promise-streams' module: https://humanwhocodes.com/snippets/2019/05/nodejs-read-stream-promise/
+-
+
+### Colors
+- PS-: [
+  {
+   fore: #23b45d,
+   back: #0d0f12
+  },
+  {
+   fore: [#efefef,#0084bd, #2ea0d6, #F96816],
+   back: #1e2429
+  },
+  {
+   fore: #b0b0b0,
+   back: #65316b
+  },
+  {
+   fore: null,
+   back: null
+  }
+]

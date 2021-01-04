@@ -15,8 +15,10 @@ const doLookup = async (api, name, items, inout = process) => {
   const [token, tokenSecret] = await creds.getKeyAndSecret('account')
   app.setToken(token, tokenSecret)
   return ps.pipeline(
-    // Split onto neewlines
+    // Split onto newlines
     items ? from.obj(items.split(',')) : inout.stdin.pipe(split()),
+
+    // http://bit.ly/3gOllcD 2020-12-15 09:10
 
     // Batch up requests
     batch(100),
